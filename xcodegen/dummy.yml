@@ -1,0 +1,178 @@
+############
+# Targets
+############
+
+targets:
+
+  # -----------
+  # MyApp_iOS
+  # -----------
+
+  Dummy:
+    type: application
+    platform: iOS
+    deploymentTarget: "12.0"
+
+    # sources
+    sources:
+      - Dummy
+
+    # Config Files
+    configFiles:
+      Debug: xcodegen/debug.xcconfig
+      Release: xcodegen/release.xcconfig
+      Test: xcodegen/test.xcconfig
+      Stage: xcodegen/stage.xcconfig
+
+    # scheme
+    scheme:
+      gatherCoverageData: true
+      testTargets:
+        - name: DummyTests
+        - name: DummyUITests
+
+    #info
+    info:
+      path: Dummy/Info.plist
+      properties:
+        ITSAppUsesNonExemptEncryption: NO
+        UIRequiresFullScreen: YES
+        UILaunchStoryboardName: LaunchScreen
+        UIMainStoryboardFile: Main
+        NSLocationAlwaysAndWhenInUseUsageDescription: "Why not?"
+        NSLocationAlwaysUsageDescription: "Why not?"
+        NSLocationWhenInUseUsageDescription: "Why not?"
+        _Configuration: $(CONFIGURATION)
+        UIBackgroundModes: ["fetch", "location"]
+
+    # dependencies
+    dependencies:
+      - package: Fetch
+      - package: DataSource
+      - package: ReactiveSwift
+      - package: netfox
+      - package: DataEngine
+
+    # scripts
+
+    postBuildScripts:
+    postCompileScripts:
+      - script: BuildScripts/Swiftlint.sh
+        name: Swiftlint
+      - script: BuildScripts/Firebase.sh
+        name: Firebase
+  DummyTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: ./DummyTests
+    settings:
+      configs:
+        debug:
+          OTHER_SWIFT_FLAGS: -D DEV
+          TEST_HOST: $(BUILT_PRODUCTS_DIR)/Dummy-Debug.app/Sumo-Debug
+          DEVELOPMENT_TEAM: B8FE2CT9GF
+        test:
+          OTHER_SWIFT_FLAGS: -D TEST
+          TEST_HOST: $(BUILT_PRODUCTS_DIR)/Dummy-Test.app/Sumo-Test
+          DEVELOPMENT_TEAM: B8FE2CT9GF
+        stage:
+          OTHER_SWIFT_FLAGS: -D STAGE
+          TEST_HOST: $(BUILT_PRODUCTS_DIR)/Dummy-Stage.app/Sumo-Stage
+          DEVELOPMENT_TEAM: B8FE2CT9GF
+        release:
+          TEST_HOST: $(BUILT_PRODUCTS_DIR)/Dummy.app/Sumo
+          DEVELOPMENT_TEAM: B8FE2CT9GF
+  DummyUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: ./DummyUITests
+    settings:
+      TEST_TARGET_NAME: Dummy
+      PRODUCT_BUNDLE_IDENTIFIER: at.stefan.dummy.uitests
+      DEVELOPMENT_TEAM: B8FE2CT9GF
+
+schemes:
+  Dummy-Debug:
+    build:
+      targets:
+        Dummy: all
+        DummyTests: [test]
+        DummyUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: true
+      targets:
+        - DummyTests
+        - DummyUITests
+    profile:
+      config: Debug
+    analyze:
+      config: Debug
+    archive:
+      config: Debug
+      customArchiveName: Dummy-Dev
+  Dummy-Test:
+    build:
+      targets:
+        Dummy: all
+        DummyTests: [test]
+        DummyUITests: [test]
+    run:
+      config: Test
+    test:
+      config: Test
+      gatherCoverageData: true
+      targets:
+        - DummyTests
+        - DummyUITests
+    profile:
+      config: Test
+    analyze:
+      config: Test
+    archive:
+      config: Test
+      customArchiveName: Dummy-Test
+  Dummy-Stage:
+    build:
+      targets:
+        Dummy: all
+        DummyTests: [test]
+        DummyUITests: [test]
+    run:
+      config: Stage
+    test:
+      config: Stage
+      gatherCoverageData: true
+      targets:
+        - DummyTests
+        - DummyUITests
+    profile:
+      config: Stage
+    analyze:
+      config: Stage
+    archive:
+      config: Stage
+      customArchiveName: Dummy-Stage
+  Dummy-Release:
+    build:
+      targets:
+        Dummy: all
+        DummyTests: [test]
+        DummyUITests: [test]
+    run:
+      config: Release
+    test:
+      config: Release
+      gatherCoverageData: true
+      targets:
+        - DummyTests
+        - DummyUITests
+    profile:
+      config: Release
+    analyze:
+      config: Release
+    archive:
+      config: Release
+      customArchiveName: Dummy

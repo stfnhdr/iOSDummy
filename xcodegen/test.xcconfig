@@ -1,0 +1,2 @@
+PRODUCT_BUNDLE_IDENTIFIER = at.stefanhaider.dummy.test
+PRODUCT_NAME = Dummy-Test
