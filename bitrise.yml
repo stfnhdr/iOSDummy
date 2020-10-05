@@ -1,0 +1,73 @@
+---
+format_version: '8'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: ios
+app:
+  envs:
+  - APP_NAME: Dummy
+  - BITRISE_SCHEME: "$APP_NAME-$APP_ENVIRONMENT"
+  - BITRISE_PROJECT_PATH: Dummy.xcodeproj
+  - INFO_PLIST_PATH: "$BITRISE_SOURCE_DIR/Dummy/SupportingFiles/Info.plist"
+  - DEVELOPER_TEAM_ID: XXXXXXXXXX
+  - opts:
+      is_expand: false
+    DEV_BRANCH_COMMIT_COUNT: '0'
+workflows:
+  _kickstart:
+    steps:
+    - git-clone@4:
+        inputs:
+        - clone_depth: '1'
+    - xcodegen@0: {}
+    - set-xcode-build-number@1:
+        inputs:
+        - build_short_version_string: ''
+        - build_version_offset: "$DEV_BRANCH_COMMIT_COUNT"
+        - plist_path: "$INFO_PLIST_PATH"
+  _teardown: {}
+  _testflight:
+    steps:
+    - ios-auto-provision@1:
+        inputs:
+        - team_id: "$DEVELOPER_TEAM_ID"
+        - generate_profiles: 'yes'
+        - distribution_type: app-store
+    - xcode-archive@2:
+        inputs:
+        - export_method: app-store
+    - deploy-to-itunesconnect-application-loader@0:
+        inputs:
+        - password: "$APPLE_ID_PW"
+        - app_password: "$APP_SPECIFIC_PW"
+        - itunescon_user: "$APPLE_ID"
+    before_run: []
+    after_run: []
+  _customer_release:
+    before_run: []
+    after_run:
+    - _testflight
+    envs:
+    - BITRISE_SCHEME: "$APP_NAME-release"
+  _test_release:
+    before_run: []
+    after_run:
+    - _testflight
+    envs:
+    - BITRISE_SCHEME: "$APP_NAME-Test"
+  sprint_release:
+    before_run:
+    - _kickstart
+    - _test_release
+    - _customer_release
+    after_run:
+    - _teardown
+  dev_release:
+    before_run:
+    - _kickstart
+    - _testflight
+    after_run:
+    - _teardown
+    envs:
+    - opts:
+        is_expand: false
+      BITRISE_SCHEME: "$APP_NAME-Dev"
