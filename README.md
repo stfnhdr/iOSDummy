@@ -2,6 +2,12 @@
 
 Dummy app for iOS Development
 
+To get the Project running, navigate to the project directory and run:
+```
+xcodegen
+swiftgen
+```
+
 ## uses:
 
 ### XCodeGen:
