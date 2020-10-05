@@ -33,7 +33,7 @@ targets:
 
     #info
     info:
-      path: Dummy/Info.plist
+      path: Dummy/SupportingFiles/Info.plist
       properties:
         ITSAppUsesNonExemptEncryption: NO
         UIRequiresFullScreen: YES
@@ -51,7 +51,6 @@ targets:
       - package: DataSource
       - package: ReactiveSwift
       - package: netfox
-      - package: DataEngine
 
     # scripts
 

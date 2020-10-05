@@ -1,0 +1,61 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "becd9a729a37bdbef5bc39dc3c702b99f9e3d046",
+          "version": "5.2.2"
+        }
+      },
+      {
+        "package": "DataSource",
+        "repositoryURL": "https://github.com/allaboutapps/DataSource",
+        "state": {
+          "branch": null,
+          "revision": "faf6e4bef61654e53454828851842e8799284e1f",
+          "version": "8.1.0"
+        }
+      },
+      {
+        "package": "Differ",
+        "repositoryURL": "https://github.com/tonyarnold/Differ.git",
+        "state": {
+          "branch": null,
+          "revision": "4c3eb4d76ad5c14075829397a5741b0badb08dce",
+          "version": "1.4.5"
+        }
+      },
+      {
+        "package": "Fetch",
+        "repositoryURL": "https://github.com/allaboutapps/Fetch",
+        "state": {
+          "branch": null,
+          "revision": "bdfd781b88dfdf87e214f00d146ae460735ea6e8",
+          "version": "2.3.0"
+        }
+      },
+      {
+        "package": "netfox",
+        "repositoryURL": "https://github.com/upstreammobility/netfox",
+        "state": {
+          "branch": null,
+          "revision": "e197d0b00fd665b4ee66c00c13372a74eda6db60",
+          "version": "1.20.0"
+        }
+      },
+      {
+        "package": "ReactiveSwift",
+        "repositoryURL": "https://github.com/ReactiveCocoa/ReactiveSwift",
+        "state": {
+          "branch": null,
+          "revision": "2260221e19eb024382a1b20cdd2c8adc4f48f8b8",
+          "version": "6.4.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

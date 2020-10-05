@@ -1,0 +1,17 @@
+# Asset configuration for targets
+xcassets:
+ - inputs:
+   - Dummy/Assets/Assets.xcassets
+   outputs:
+   - templatePath: swiftgen/shared_template.stencil
+     output: Dummy/Code/Utilities/SharedAssets.swift
+     params:
+       enumName: SharedAssets
+
+ - inputs:
+   - Dummy/Assets/Colors.xcassets
+   outputs:
+   - templatePath: swiftgen/platform_template.stencil
+     output: Dummy/Code/Utilities/Colors.swift
+     params:
+       enumName: Colors

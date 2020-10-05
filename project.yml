@@ -25,9 +25,6 @@ packages:
   netfox:
     url: https://github.com/upstreammobility/netfox
     majorVersion: 1.20.0
-  DataEngine:
-    url: https://mgmt.upstream-mobility.at/bitbucket/scm/dat/ios.git
-    branch: "master"
 
 ############
 # Configs
