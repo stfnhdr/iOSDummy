@@ -58,8 +58,8 @@ targets:
     postCompileScripts:
       - script: BuildScripts/Swiftlint.sh
         name: Swiftlint
-      - script: BuildScripts/Firebase.sh
-        name: Firebase
+      #- script: BuildScripts/Firebase.sh
+      #  name: Firebase
   DummyTests:
     type: bundle.unit-test
     platform: iOS
