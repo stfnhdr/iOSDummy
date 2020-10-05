@@ -1,5 +1,11 @@
 # iOSDummy
 
+---
+
+⚡️ Swift: 5.3.0 📱 iOS 12
+
+---
+
 Dummy app for iOS Development
 
 To get the Project running, navigate to the project directory and run:
